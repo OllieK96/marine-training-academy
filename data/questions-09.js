@@ -1,0 +1,20 @@
+TRAINING.addQuestions('prop', [
+ ["What is a typical symptom of voltage drop in a starting circuit?", ["Slow cranking", "Fast cranking", "Louder alarm", "Higher RPM"], 0, "High resistance reduces the voltage reaching the starter."],
+ ["When should you measure voltage drops in the starting circuit?", ["While cranking", "With the engine off and no load", "With the radio on", "At anchor"], 0, "Voltage drop only appears under load."],
+ ["What does the engine ECU communicate over?", ["CAN-bus (J1939 or similar)", "Wi-Fi", "Bluetooth only", "FM radio"], 0, "Modern engines use CAN communications."],
+ ["Which standard is mentioned for ignition-protected equipment in engine spaces?", ["ISO 8846", "ISO 9001", "AS 1100", "ISO 7010"], 0, "ISO 8846 covers ignition protection."],
+ ["Which diagnostic tool is typically used for CAT electronic engines?", ["Electronic Technician (ET)", "VictronConnect", "MasterAdjust", "Garmin ActiveCaptain"], 0, "CAT ET with a communication adapter is the usual tool."],
+ ["What resistance do you expect across a properly terminated CAN bus with power off?", ["About 60 Ω", "0 Ω", "About 240 Ω", "Infinite"], 0, "Two 120 Ω terminators in parallel."],
+ ["What should you do before welding on a vessel with electronic engines?", ["Disconnect ECUs, alternators and batteries as the maker specifies", "Nothing", "Turn on the radio", "Remove the anode"], 0, "Welding currents can damage electronics."],
+ ["Why should batteries not be disconnected with the engine running?", ["Voltage spikes can damage electronics", "It saves fuel", "It cools the engine", "It has no effect"], 0, "Alternators can create spikes without a battery."],
+ ["What is the first step in diagnosing an electronic engine fault?", ["Read fault codes with the manufacturer's tool", "Replace the ECU", "Change fuel", "Disconnect the display"], 0, "Fault codes guide diagnosis."],
+ ["Which feature does a joystick system provide?", ["Coordinated control of pods and engines", "Radar control", "Bilge control", "Tank gauging"], 0, "The joystick controls thrust and steering together."],
+ ["A pod drive does not steer. Which is a likely cause?", ["Hydraulic or actuator fault or sensor calibration issue", "Dirty hull", "Low radio volume", "Weak GPS"], 0, "Steering actuators and sensors must be checked."],
+ ["What is a common source of intermittent faults on joystick systems?", ["Corroded or loose connectors", "Fresh paint", "Anchor type", "Wind"], 0, "Connectors in bilges and consoles often corrode."],
+ ["Why is a dedicated battery often fitted near a bow thruster?", ["To keep cable runs short and supply high current", "To power the radio", "To charge phones", "To lower battery cost"], 0, "Short cables reduce voltage drop."],
+ ["What happens if thruster cable is undersized?", ["Voltage drop reduces thrust and cables overheat", "Thrust increases", "The battery charges", "Nothing"], 0, "High current with high resistance is a problem."],
+ ["Thrusters are normally rated for:", ["Short run times", "Continuous running", "Sailing only", "Anchor use"], 0, "Duty cycle is limited to avoid overheating."],
+ ["A thruster trips thermal protection quickly. What is a possible cause?", ["Low voltage, obstruction or hot motor", "High tide", "Dirty paint", "Radar interference"], 0, "Excess current or low voltage overheats the motor."],
+ ["What should you check across a contactor while the thruster runs?", ["Voltage drop", "Resistance with power on", "AC frequency", "Light level"], 0, "Measure voltage drop to detect worn contacts."],
+ ["Which statement about CAN-bus terminators is correct?", ["There should be exactly two, one at each end", "None needed", "One per device", "Only one in the middle"], 0, "Two terminators ensure proper termination."]
+]);

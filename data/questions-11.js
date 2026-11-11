@@ -1,0 +1,20 @@
+TRAINING.addQuestions('hotel', [
+ ["Why must an automatic bilge pump be wired directly to the battery?", ["To operate even when the main isolator is off", "To save cable", "To raise voltage", "For appearance"], 0, "It must protect the boat when unattended."],
+ ["What is the purpose of a high-water alarm?", ["Independent warning of failed pump or float", "To start the engine", "To fill the tank", "To measure voltage"], 0, "It is a backup to the primary pump system."],
+ ["A windlass is slow and hot. What is likely?", ["Voltage drop in the supply cable", "Too many batteries", "Too much chain", "Wrong flag"], 0, "High resistance reduces voltage at the motor."],
+ ["Which device carries the heavy current to a windlass motor?", ["Contactor/solenoid", "Dimmer", "Float switch", "Thermostat"], 0, "A solenoid or contactor switches the heavy current."],
+ ["A windlass clicks but does not run. What is a likely cause?", ["Low supply voltage or faulty contactor/motor", "Wrong time zone", "Low tide", "Poor GPS"], 0, "Check supply at the motor and the contactor drop."],
+ ["What does short-cycling of a freshwater pump indicate?", ["Air leak, accumulator or pressure switch problem", "Full battery", "High tide", "Wrong GPS"], 0, "The system can't hold pressure."],
+ ["Which type of air-conditioning uses a central chiller and air handlers?", ["Chilled-water system", "Self-contained unit", "Window unit", "Evaporative cooler"], 0, "Chilled-water systems use a central chiller."],
+ ["Why is a flow switch used on a seawater cooling circuit?", ["To protect the compressor if flow is lost", "To measure speed", "To save water", "To power lights"], 0, "No flow would cause overheating and high pressure."],
+ ["What is a common reason for an air-con high-pressure fault?", ["Poor seawater flow or blocked strainer", "Low battery", "Wrong flag", "Radar"], 0, "Reduced cooling of the condenser raises pressure."],
+ ["What can reduce compressor inrush current?", ["Soft starter or inverter compressor", "Larger fuse", "Thicker paint", "Radar"], 0, "These devices limit startup current."],
+ ["Which dimming method can create radio noise?", ["PWM dimming", "Incandescent bulbs", "Candlelight", "Sun"], 0, "PWM switching can radiate interference."],
+ ["Why must a watermaker be flushed with fresh water after use?", ["To prevent membrane fouling", "To make noise", "To charge batteries", "To measure salinity"], 0, "Stagnant seawater fouls the membranes."],
+ ["What does a salinity probe on a watermaker do?", ["Determines whether product water goes to the tank or waste", "Measures speed", "Measures voltage", "Controls the engine"], 0, "It protects the tank from poor-quality water."],
+ ["A 12 V fridge controller flashes a low-voltage code. What do you check?", ["Cable size and voltage at the controller under load", "Radar", "Autopilot", "Compass"], 0, "Voltage drop is common."],
+ ["Which factor is critical for a macerator toilet failure?", ["Low voltage and blockages", "Radar range", "Anchor type", "Flag colour"], 0, "Pumps need adequate voltage and clear passages."],
+ ["What should you check first with a failed pump?", ["Voltage, ground and inlet strainer", "Compass", "GPS", "Radar"], 0, "Basic supply and flow checks first."],
+ ["What is the usual symptom of a failed condensate pump?", ["Water overflowing into the bilge or cabin", "No sound", "High frequency", "Cold boat"], 0, "The tray overflows."],
+ ["Which statement is true about fridge compressor controllers?", ["They include battery-protection thresholds", "They need no power", "They run on AC only", "They never show codes"], 0, "They protect the battery by cutting out at low voltage."]
+]);

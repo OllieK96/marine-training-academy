@@ -1,0 +1,20 @@
+TRAINING.addQuestions('mastervolt', [
+ ["Which Mastervolt device combines inverter, charger and transfer switch?", ["Mass Combi", "ChargeMaster", "Alpha Pro", "MasterShunt"], 0, "The Mass Combi is the inverter-charger."],
+ ["What does the Alpha Pro do?", ["Regulates the alternator with multi-stage charging", "Measures AC power", "Displays navigation data", "Cools batteries"], 0, "It is an external alternator regulator."],
+ ["MasterBus devices should be wired:", ["In a daisy chain with terminators at both ends", "In a star", "With T-pieces", "Randomly"], 0, "MasterBus is a daisy chain with two terminators."],
+ ["How many terminators should a MasterBus network have?", ["Two, one at each end", "One in the middle", "None", "One per device"], 0, "Two terminators, one at each end."],
+ ["Which software is used to configure Mastervolt devices on MasterBus?", ["MasterAdjust", "VictronConnect", "Garmin ActiveCaptain", "Windows Update"], 0, "MasterAdjust is Mastervolt's configuration software."],
+ ["What does the MasterShunt measure?", ["Battery current to calculate state of charge", "Wind speed", "Tank level only", "Compass heading"], 0, "A shunt measures current for battery monitoring."],
+ ["What is a common cause of a charger never leaving bulk?", ["Voltage drop in the charge cable or loads during charging", "Fresh paint", "VHF radio", "Low tide"], 0, "The battery never reaches absorption voltage."],
+ ["Why is battery type setting important on a ChargeMaster?", ["The profile determines the charge voltages", "It changes AC voltage", "It changes frequency", "It changes colour"], 0, "A wrong profile can undercharge or overcharge."],
+ ["What does 'Power Support' do?", ["Adds inverter power from the battery when demand exceeds supply", "Starts the engine", "Charges the bow thruster", "Cleans the bilge"], 0, "It supplements limited shore/generator power."],
+ ["Why can wrong sense wiring on an Alpha Pro be a problem?", ["It can cause overcharge or undercharge", "It changes engine speed only", "It affects radio", "It has no effect"], 0, "The regulator needs the correct voltage and temperature information."],
+ ["What should be done if devices drop off MasterBus?", ["Check cables, terminators and power on the network", "Replace the battery", "Change the anchor", "Reboot the radio"], 0, "Connectivity issues usually come from cables or terminators."],
+ ["What is a feature of MLI Ultra batteries?", ["Integrated BMS and communications", "No protection", "Water-cooled only", "AC output"], 0, "They contain a BMS and communicate with the system."],
+ ["Which statement is true about lithium charging sources?", ["All must use compatible lithium profiles", "Any profile is fine", "Float must be 15 V", "They must be AC"], 0, "Compatibility is essential for safe charging."],
+ ["Why fit a fuse close to the battery?", ["To protect the cable from overheating in a fault", "To measure SoC", "To improve radio reception", "To reduce size"], 0, "It protects the conductor against short circuits."],
+ ["What is the first step when servicing AC wiring on a Mass Combi?", ["Isolate DC and AC to remove all sources", "Turn the inverter on", "Remove the RCD", "Disconnect the display only"], 0, "Inverters can energise AC output without shore power."],
+ ["The ChargeMaster's multiple outputs are used for:", ["Charging several battery banks", "Powering AC", "Speed control", "VHF"], 0, "They allow house, starter and thruster batteries to be charged."],
+ ["Which tool should you use to see a Mastervolt device's exact settings for your model?", ["The manual and MasterAdjust", "Any generic guide", "A guess", "Another brand's manual"], 0, "Settings differ by model and revision."],
+ ["Where should the Alpha Pro's battery sense lead go?", ["To the battery being charged", "To the engine block", "To the AC neutral", "To the radio"], 0, "It must sense the actual battery voltage."]
+]);

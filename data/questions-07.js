@@ -1,0 +1,20 @@
+TRAINING.addQuestions('steer', [
+ ["What does a helm pump do in hydraulic steering?", ["Converts wheel movement into hydraulic flow", "Charges the battery", "Measures heading", "Cools the engine"], 0, "The helm pump pushes oil to the cylinder."],
+ ["What is a common symptom of air in a hydraulic steering system?", ["Spongy wheel and lost motion", "Overheated compass", "Loud radio", "Low battery"], 0, "Air is compressible."],
+ ["Which autopilot part reports actual rudder angle?", ["Rudder reference sensor", "Fluxgate compass", "GPS antenna", "Speed log"], 0, "The rudder reference gives feedback."],
+ ["Where should a fluxgate compass be mounted?", ["Away from magnetic items, cables and speakers", "Next to the engine", "Beside the speaker", "Near the battery"], 0, "Magnetic interference affects heading."],
+ ["What is the electrical risk of undersized autopilot pump cable?", ["Voltage drop leading to weak steering", "Higher compass accuracy", "Better battery life", "Lower noise"], 0, "Pump motors draw significant current."],
+ ["Which drive type uses an electric ram on a quadrant?", ["Linear drive", "Rotary drive", "Hydraulic pump", "Thruster"], 0, "A linear drive pushes the quadrant arm."],
+ ["What is steer-by-wire?", ["Wheel movement is sent electrically to the drives instead of mechanically", "A hydraulic hose system", "A cable steering system", "A kind of compass"], 0, "There is no mechanical link between helm and drive."],
+ ["What does joystick control combine?", ["Steering, engine and gear commands", "Radio and radar", "Lights and pumps", "Fuel and water"], 0, "A joystick system coordinates drives and engines."],
+ ["What is the first step before clearing fault codes?", ["Read and record them", "Disconnect the battery", "Replace the ECU", "Update firmware"], 0, "Codes are valuable diagnostic information."],
+ ["Which wiring issue often causes random steering alarms?", ["Low or noisy supply voltage", "Dirty windows", "A loose flag", "Radar tuning"], 0, "ECUs need a stable supply."],
+ ["What should you do after replacing a rudder reference sensor?", ["Recalibrate centre and limits", "Repaint the rudder", "Disable the autopilot", "Clean the anchor"], 0, "Calibration sets the reference points."],
+ ["An autopilot oscillates. Which check is most sensible first?", ["Backlash in rudder reference and gain settings", "VHF channel", "Anchor chain", "Bilge pump"], 0, "Loose feedback and high gain cause hunting."],
+ ["What should be done to hydraulic steering before disconnecting hoses?", ["Relieve pressure", "Increase pressure", "Add air", "Start the engine"], 0, "Pressurised oil is dangerous."],
+ ["What is the usual symptom of reversed pump polarity on an autopilot?", ["Rudder drives away from the target direction", "No compass reading", "Louder alarm only", "Lower voltage"], 0, "The pump pushes the wrong way."],
+ ["Why test steering with the autopilot off?", ["To determine if the fault is mechanical/hydraulic or in the autopilot", "To save fuel", "To save power", "To reset the GPS"], 0, "It separates the helm system from the autopilot."],
+ ["Volvo Penta IPS is an example of:", ["A pod drive with electronic control", "A diesel generator", "A solar controller", "An isolation transformer"], 0, "IPS is a pod propulsion system with electronic steering."],
+ ["What is 'hard-over time' on an autopilot set-up?", ["Time for the rudder to travel from one limit to the other", "Engine run time", "Battery life", "Boat speed"], 0, "It helps the computer predict rudder movement."],
+ ["After any steering repair you should:", ["Redo the autopilot calibration", "Replace the batteries", "Change the antifoul", "Reset the radio"], 0, "Rudder limits and drive direction may have changed."]
+]);

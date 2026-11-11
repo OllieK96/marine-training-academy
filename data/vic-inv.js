@@ -1,0 +1,123 @@
+/* Victron path, module 2: inverter/chargers. Facts paraphrased from the MultiPlus-II, Quattro, VE.Bus configuration, ESS and Inverter Smart manuals (see sources/INDEX.md). */
+TRAINING.addModule({ id:'vic-inv', title:'Victron 2: Inverter/Chargers', icon:'🔌',
+  summary:'MultiPlus-II, Quattro and Phoenix/Inverter Smart in depth: spec tables, DC and AC installation, settings and charge curves, Quattro DIP switches, VE.Bus parallel and 3-phase, PowerAssist, generators, assistants (ESS, Two-Signal BMS, Ignore AC).',
+  lessons:[
+  { id:'i1', title:'Reading the MultiPlus-II specification table', level:'Foundation', min:12, src:['mp2','mp2b','rating'], body:[
+    ['p', "The MultiPlus-II 230V manual lists three marine-popular 3 kVA models side by side. Learning to read that table quickly lets you check a quote, a boat's existing unit or a replacement part at the dock without a laptop."],
+    ['table', ['Item (MultiPlus-II 230V)', '12/3000/120-32', '24/3000/70-32', '48/3000/35-32'], [
+      ['Inverter DC input range', '9.5 - 17 V', '19 - 33 V', '38 - 66 V'],
+      ['Continuous output at 25 °C', '3000 VA / 2400 W', '3000 VA / 2400 W', '3000 VA / 2400 W'],
+      ['Continuous output at 40 °C / 65 °C', '2200 W / 1700 W', '2200 W / 1700 W', '2200 W / 1700 W'],
+      ['Peak power', '5500 W', '5500 W', '5500 W'],
+      ['Maximum inverter efficiency', '93 %', '94 %', '95 %'],
+      ['Zero-load power', '13 W', '13 W', '11 W'],
+      ['Zero-load in Search mode', '3 W', '3 W', '2 W'],
+      ['Charge current, house battery', '120 A', '70 A', '35 A'],
+      ['Absorption / float / storage', '14.4 / 13.8 / 13.2 V', '28.8 / 27.6 / 26.4 V', '57.6 / 55.2 / 52.8 V'],
+      ['AC feed-through (transfer switch)', '32 A', '32 A', '32 A']]],
+    ['ul', ["<b>Name decoding:</b> 12/3000/120-32 = 12 V battery, 3000 VA, 120 A charger, 32 A AC transfer switch.", "<b>VA vs W:</b> 3000 VA is only available at 25 °C and with a power factor near 1. Plan around the 2200 W figure for an engine room that sits near 40 °C - a real fridge, galley and air-con load shows quickly why derating matters.", "<b>Input window:</b> the AC input is specified at 187 - 265 V and 45 - 65 Hz; the shipped default input window is wider (180 - 270 V) so a weak marina pedestal does not cause constant drop-outs.", "<b>Extra hardware:</b> a programmable relay, two general purpose communication ports (for BMS and sensors), an optional external AC current sensor (100 A), a starter-battery charge output (4 A) on the 12/24 V models, and a temperature sensor input (the sensor is not supplied with 48 V models)."]],
+    ['note', "The charger absorption figures in the table are <b>defaults for lead-acid</b> (Gel/AGM deep-discharge style). A lithium bank needs its own voltages from the battery maker - never leave the factory defaults on a LiFePO4 bank."],
+    ['tip', "Efficiency and output change with temperature. Victron publishes a separate 'output rating, operating temperature and efficiency' note: it explains why a unit that is fine on the bench trips on overload in a hot, unventilated bilge compartment."],
+    ['int', 'rates'],
+    ['qc', { q:"A MultiPlus-II 24/3000/70-32 is installed in a warm engine space (about 40 °C). What continuous power should you plan for?", o:["3000 W", "2200 W", "1700 W", "5500 W"], a:1, e:"The manual lists 2400 W at 25 °C, 2200 W at 40 °C and 1700 W at 65 °C. 5500 W is only the peak power." }]
+  ]},
+  { id:'i2', title:'Installing a MultiPlus-II: DC cables, fuses, torque and AC wiring', level:'Foundation', min:14, src:['mp2','wu','cables'], body:[
+    ['p', "Most inverter/charger call-outs trace back to the DC side: undersized cable, loose lugs or the wrong fuse. The MultiPlus-II manual gives a sizing table per model; it assumes copper cable rated at 90 °C and two length bands (0-5 m and 5-10 m, positive and negative each)."],
+    ['table', ['Model', 'Battery capacity', 'DC fuse', 'Cable 0-5 m (each pole)', 'Cable 5-10 m (each pole)'], [
+      ['12/3000/120', '400 - 1200 Ah', '400 A', '2 x 50 mm²', '2 x 70 mm²'],
+      ['24/3000/70', '200 - 700 Ah', '300 A', '50 mm²', '95 mm²'],
+      ['48/3000/35', '100 - 400 Ah', '125 A', '35 mm²', '70 mm²'],
+      ['12/5000/220', '600 - 2400 Ah', '600 A', '2 x 95 mm²', '2 x 150 mm²'],
+      ['24/5000/120', '400 - 1400 Ah', '400 A', '2 x 50 mm²', '2 x 70 mm²'],
+      ['48/5000/70', '200 - 800 Ah', '200 A', '70 mm²', '120 mm²'],
+      ['48/8000/110', '200 - 800 Ah', '300 A', '2 x 50 mm²', '2 x 70 mm²'],
+      ['48/10000/140', '250 - 1000 Ah', '400 A', '2 x 50 mm²', '2 x 70 mm²'],
+      ['48/15000/200', '300 - 1200 Ah', '600 A', '2 x 95 mm²', '2 x 150 mm²']]],
+    ['h', 'DC connection procedure'],
+    ['steps', ["Switch everything off and isolate the battery. Remove the service panel (two screws at the bottom of the enclosure).", "Use a torque wrench with an <b>insulated box spanner</b> so a slipped tool cannot short the battery. Recommended torque for the DC studs is <b>12 Nm (M8 nut)</b>.", "Stack the hardware in the right order: lug first, then flat washer, lock washer, nut. Tighten for minimum contact resistance.", "Do not run battery cables inside a closed conduit (the table notes this explicitly).", "Fit the DC fuse close to the battery positive, then check polarity before closing the isolator."]],
+    ['h', 'Optional DC-side connections'],
+    ['ul', ["<b>Voltage sense:</b> two 0.75 mm² (AWG 18) wires straight to the battery or distribution points. The charger compensates up to 1 V of drop in each cable; if it would exceed 1 V it limits the charge current instead.", "<b>Temperature sensor:</b> isolated sensor fitted to the battery negative terminal.", "<b>Starter battery:</b> 12 and 24 V models have a 4 A output for a starter battery."]],
+    ['h', 'AC wiring and earthing'],
+    ['ul', ["The unit is a <b>safety class I</b> product: AC input and output must be provided with an uninterrupted protective earth, or the case must be bonded to the hull/earth plate on mobile installations where shore earth is disconnected with the plug.", "A <b>ground relay</b> connects the AC-out neutral to the chassis automatically when no external AC is present, and opens before the input safety relay closes - this keeps an RCD on the output working.", "The inverter has a mains-frequency isolating transformer, so no DC can appear at the AC ports and <b>type A RCDs</b> are suitable.", "On boats, direct connection to the shore earth is not recommended because of galvanic corrosion: use an isolation transformer (see module Victron 6).", "AC terminal torque: M4 1 Nm, M5 3 Nm, M6 5.5 Nm, M8 12 Nm."]],
+    ['safety', "Internal resistance matters on small banks: a 12 V 3 kVA unit on a 100 Ah battery will see voltage dips and ripple alarms long before it hits its rating. The manual points installers to Wiring Unlimited / Energy Unlimited for sizing."],
+    ['int', 'cable'],
+    ['qc', { q:"Which torque does the MultiPlus-II manual recommend for the M8 battery stud nut?", o:["1 Nm", "5.5 Nm", "12 Nm", "33 Nm"], a:2, e:"12 Nm on the M8 DC nut. 1, 3 and 5.5 Nm are for the smaller AC terminal screws (M4, M5, M6)." }]
+  ]},
+  { id:'i3', title:'Settings, defaults and the charge curve', level:'Intermediate', min:14, src:['mp2','vcve'], body:[
+    ['p', "A MultiPlus-II leaves the factory ready for single-unit operation, but its default charge settings assume lead-acid. Know the defaults so you can tell what a previous installer changed."],
+    ['table', ['Setting', 'Factory default'], [
+      ['Inverter output / frequency', '230 VAC / 50 Hz'],
+      ['AC input window', '180 - 270 VAC, 45 - 65 Hz'],
+      ['Mode', 'Stand-alone (not parallel / 3-phase)'],
+      ['AES (Automatic Economy Switch)', 'Off'],
+      ['Ground relay', 'On'],
+      ['Charge curve', 'Four-stage adaptive with BatterySafe'],
+      ['Battery type', 'Victron Gel Deep Discharge (also OK for AGM deep-discharge)'],
+      ['Charge current', '100 % of maximum'],
+      ['Absorption / float / storage (12 V)', '14.4 V / 13.8 V / 13.2 V (storage not adjustable)'],
+      ['Absorption time', 'Up to 8 hours depending on bulk time'],
+      ['Repeated absorption', '1 hour every 7 days'],
+      ['Bulk protection', 'On (10 hour limit)'],
+      ['AC input current limit', '32 A for 3 kVA models, 50 A for 8 and 10 kVA'],
+      ['UPS feature', 'On'],
+      ['Dynamic current limiter / WeakAC', 'Off / Off'],
+      ['BoostFactor', '2']]],
+    ['h', 'What the main settings really do'],
+    ['ul', ["<b>AES:</b> narrows the sine slightly to cut no-load consumption by about 20 %. Stand-alone only.", "<b>Search mode:</b> alternative to AES - no-load consumption drops by about 70 % because the inverter switches itself off with no load and pulses every two seconds. Tiny loads (an LED lamp) may be missed.", "<b>Ground relay:</b> grounds the AC-out neutral to the chassis when the input relays are open so the output RCD still functions.", "<b>Bulk protection:</b> stops a charge after 10 hours of bulk - a hint that something (for example a shorted cell) is wrong. Reset by switching off and on. It can only be disabled in VEConfigure.", "<b>UPS feature:</b> near-instant switch to inverter if AC fails. On small, unstable generators it can cause constant switching, so it can be turned off.", "<b>Dynamic current limiter:</b> for inverter-type generators that lower rpm at light load: the Multi increases its draw gradually so the generator can follow.", "<b>WeakAC:</b> accepts distorted or weak supply (often a generator) - maximum charge current drops to roughly 80 % when active.", "<b>BoostFactor:</b> change only after consulting Victron or a trained engineer."]],
+    ['h', 'Charge-current rule of thumb'],
+    ['p', "For lead-acid life, the Quattro manual advises a charge current of <b>10 - 20 % of the battery capacity in Ah</b> (for example 50 - 100 A for a 24 V / 500 Ah bank). Faster charging needs the temperature sensor fitted to the battery, and may make a fixed absorption time more sensible than adaptive."],
+    ['steps', ["Open the unit in <b>VictronConnect</b> (or VEConfigure over MK3-USB for older workflows).", "Pick the battery type or enter manual voltages from the battery maker's datasheet.", "Set the charge current to the battery limit, not the charger maximum.", "Set the AC input current limit to the shore breaker (or generator rating), allowing for the PowerAssist behaviour you want.", "Save, then record the settings (screenshot or file) so you can compare later."]],
+    ['tip', "Battery ripple above 1.5 V rms is a classic reason for the 'Low battery' and 'Overload' LEDs to flash together. The cure is shorter, thicker cables and (for small banks) more capacity - not new firmware."],
+    ['int', 'charge'],
+    ['qc', { q:"With 'Bulk protection' enabled, what happens when bulk charging takes longer than 10 hours?", o:["Charging continues indefinitely", "The charger stops and flashes the Bulk LED until the unit is switched off and on", "The inverter shuts down permanently", "Float voltage is raised"], a:1, e:"Bulk protection treats an over-long bulk stage as a possible system fault. It can be switched off only with VEConfigure." }]
+  ]},
+  { id:'i4', title:'Quattro: two AC inputs and DIP-switch setup', level:'Intermediate', min:15, src:['qu3','qu5'], body:[
+    ['p', "The Quattro has <b>AC-in-1</b> (normally the generator) and <b>AC-in-2</b> (normally shore). If voltage is present on both, the Quattro selects AC-in-1. It then does the transfer-switch job internally, so no external changeover is needed."],
+    ['h', 'Step 1 DIP switches (3 kVA Quattro)'],
+    ['table', ['ds8 ds7 ds6', 'AC-in-1 limit', 'at 230 V'], [['off off off', '6 A', '1.4 kVA'], ['off off on', '10 A', '2.3 kVA'], ['off on off', '12 A', '2.8 kVA'], ['off on on', '16 A', '3.7 kVA'], ['on off off', '20 A', '4.6 kVA'], ['on off on', '25 A', '5.7 kVA'], ['on on off', '30 A', '6.9 kVA'], ['on on on', '50 A (factory)', '11.5 kVA']]],
+    ['ul', ["<b>ds5:</b> AC-in-2 limit - off 16 A (default), on 30 A. More than 30 A needs VEConfigure or a Digital Multi Control panel. When a panel is connected, the panel's value overrides the unit's stored value.", "<b>ds4/ds3:</b> charge current - off/off 25 %, off/on 50 %, on/off 75 % (default), on/on 100 %.", "<b>ds2/ds1:</b> not used in step 1 on this firmware family; on firmware numbers in the xxxx1xx range they select stand-alone / parallel / 3-phase.", "Store the settings by pressing the <b>Up button for 2 seconds</b>; the overload and low-battery LEDs flash to confirm."]],
+    ['h', 'Step 2 DIP switches'],
+    ['table', ['Switch', 'Meaning'], [['ds8-ds7', 'Charge voltage set: off/off 14.1 V (Gel long-life / OPzV), off/on 14.4 V (default Gel / AGM deep discharge), on/off 14.7 V (AGM spiral cell, OPzS semi-float), on/on 15.0 V (OPzS cyclic). 24/48 V models double/quadruple.'], ['ds6', 'Absorption time: on 8 h, off 4 h'], ['ds5', 'Adaptive charging: on active, off fixed absorption'], ['ds4', 'Dynamic current limiter on/off'], ['ds3', 'UPS function on/off'], ['ds2', 'Output voltage: on 230 V, off 240 V'], ['ds1', 'Frequency: on 50 Hz, off 60 Hz']]],
+    ['note', "A brand-new unit shows all DIP switches 'off' because factory settings are loaded by computer - the real settings live in the microprocessor. Do not assume 'all off' means what the table says until you store a DIP setting."],
+    ['tip', "Small generators are often optimistic about their continuous rating. The manual advises setting the AC-in-1 limit well below the nameplate figure if the generator struggles."],
+    ['int', 'dip:quattro'],
+    ['qc', { q:"Quattro DIP switches ds8, ds7, ds6 are set on/on/off. What AC-in-1 current limit is that?", o:["16 A", "25 A", "30 A", "50 A"], a:2, e:"on-on-off = 30 A (6.9 kVA). on-on-on is 50 A." }]
+  ]},
+  { id:'i5', title:'VE.Bus systems: parallel and three-phase', level:'Advanced', min:15, src:['mp2','qu3','vcve'], body:[
+    ['p', "VE.Bus is the RJ45-connected (UTP) communications bus that lets MultiPlus-II and Quattro units act as one system for parallel (more power) and three-phase operation, and lets a GX device or panel see everything."],
+    ['h', 'Rules for paralleling (MultiPlus-II 230V manual)'],
+    ['ul', ["Up to <b>six identical units</b> in parallel (8k/10k/15k models need an external AC transfer switch if paralleled).", "All units connect to the <b>same battery</b>.", "DC cables must be <b>equal length and cross-section</b>. With a common DC distribution point, the cable from the battery to the point must carry at least the sum of the required unit cables.", "Leave at least <b>10 cm</b> around the units for ventilation.", "UTP cables run <b>directly unit to unit</b> (and to the panel): no splitter or connection boxes.", "Connect the <b>negative battery cables first</b>, then the UTP cables.", "Only <b>one</b> remote control (panel or switch) may be connected to the system."]],
+    ['h', 'Three-phase'],
+    ['ul', ["Three-phase uses the same RJ45 UTP connection as parallel operation.", "Supported as <b>wye (star)</b> only: the unit is unsuitable for a three-phase delta configuration.", "Strings of paralleled units can be placed in each phase (excluding 8, 10 and 15 kVA units).", "Configuration is a separate step afterwards: VictronConnect (VE.Bus configuration guide), VE.Bus Quick Configure, or the VE.Bus System Configurator."]],
+    ['h', 'Workflow'],
+    ['steps', ["Fit and wire all DC cables with identical lengths. Torque each connection.", "Fit the UTP cables unit-to-unit. Check no unit is double-connected.", "Power all units; each reports a VE.Bus code until the system is configured.", "Configure the system (leader / followers are assigned in the VE.Bus configuration), then restart.", "Test with a load: verify each phase or unit shares current (VictronConnect or GX device)."]],
+    ['tip', "Unit-by-unit VE.Bus error codes (see the Victron Error & LED Reference module) tell you whether a problem is 'one unit' or 'the whole system'. Code 3 means the expected device count does not match: usually a cable or a missing configuration."],
+    ['int', 'vebus'],
+    ['qc', { q:"How many identical MultiPlus-II units (excluding 8k/10k/15k) can be paralleled on one VE.Bus system?", o:["Two", "Three", "Six", "Twelve"], a:2, e:"The manual allows up to six identical units in parallel." }]
+  ]},
+  { id:'i6', title:'PowerControl, PowerAssist, UPS and generators', level:'Intermediate', min:12, src:['qu3','mp2','mpgen','gen'], body:[
+    ['p', "The most useful (and most misunderstood) features of a Multi are about <b>not tripping the shore breaker</b>."],
+    ['ul', ["<b>PowerControl:</b> when AC input current approaches the set limit the unit first reduces its charge current.", "<b>PowerAssist:</b> if loads still exceed the limit, the inverter adds battery power to the AC side so the supply never overloads. Set the limit to the pedestal breaker or a bit under.", "<b>Dynamic current limiter and WeakAC:</b> make marginal generators happy (see Settings lesson).", "<b>UPS:</b> short, near-seamless transfer to battery on supply loss."]],
+    ['table', ['Situation', 'What to check'], [['Shore breaker trips when kettle and charger run', 'AC input current limit set too high or PowerAssist unavailable (battery low / limits)'], ['Generator hunts or cuts in and out', 'Generator too small for load plus charger; use lower AC-in limit; try dynamic current limiter or WeakAC'], ['Unit keeps switching to inverter on a generator', 'Generator voltage or frequency unstable; widen input window, adjust UPS setting'], ['Charger does not run on generator', 'Distortion too high: turn WeakAC and dynamic current limiter on'], ['Input AC rejected on a weak pedestal', 'Check lower voltage limit; the manual notes raising it to 210 V in some switch-over fault cases']]],
+    ['p', "Victron also publishes a technical note on using the MultiPlus to reduce generator operating cost: with PowerAssist and a properly sized battery bank the generator can be sized and run closer to its efficient load rather than for peak demand. Automatic generator start/stop (GX device based) starts the generator on conditions such as battery voltage, state of charge or load, and stops it on a run-time or quiet-hour schedule."],
+    ['note', "When a GX device does generator auto-start, the inverter/charger AC input limit for the generator should be set so the combination of load and charge stays within the generator rating."],
+    ['qc', { q:"A Multi on a small generator keeps switching to inverter mode. Which setting should you review first?", o:["BoostFactor", "UPS feature and the AC input voltage/frequency window", "Storage voltage", "Bulk protection"], a:1, e:"Unstable or distorted generator output can make the UPS function switch repeatedly. The UPS feature can be turned off, and the input window can be adjusted." }]
+  ]},
+  { id:'i7', title:'Assistants: Two-Signal BMS, ESS and Ignore AC', level:'Advanced', min:14, src:['othli','ess','vcve','cerbo'], body:[
+    ['p', "<b>Assistants</b> are small configurable programs added to a VE.Bus unit in VEConfigure3 / VictronConnect. They extend what the inverter/charger does without extra hardware."],
+    ['h', 'Two-Signal BMS Support (third-party lithium)'],
+    ['ul', ["Use when a non-Victron lithium BMS has two potential-free contacts: one for 'battery full / cell over-voltage' and one for 'battery empty / cell under-voltage'.", "On the over-voltage signal the Multi can <b>switch to float</b> or <b>disable the charger</b>. 'Switch to float' (with float set below the battery voltage) avoids unnecessary cycling. 'Disable charger' means some models still draw a small current from the battery for their control supply.", "On the empty signal the inverter is disabled.", "Inputs are analogue, non-isolated, with a pull-up resistor: 1 mA is enough for a closed signal, so isolate on the BMS side with a small relay contact (or an opto-coupler).", "Needs recent firmware (the document lists 19xx2xx/20xx2xx or 26xx4xx/27xx4xx) and a unit with auxiliary inputs."]],
+    ['h', 'ESS (Energy Storage System)'],
+    ['ul', ["The ESS design manual covers grid-connected systems, including systems with PV and storage. It also covers <b>inverter-priority</b> ('intentional islanding' / ignore AC input) installations.", "Grid-feed-in needs network compliance: the MultiPlus-II manual lists limits such as a maximum network impedance and requires a GX device in some multi-phase installations - check the grid-code section for the country.", "DVCC behaves differently when ESS is active: for example DC-coupled MPPTs are not limited when 'allow DC MPPT to export' is on."]],
+    ['h', 'Ignore AC input (island-priority)'],
+    ['p', "VictronConnect's VE.Bus guide shows the <b>Ignore AC</b> and 'do not ignore AC' logic as an AC input relay condition: ignoring means the input relay is open and the unit keeps running from the battery. The condition can be based on battery voltage (for example 'do not ignore the grid when battery voltage falls below a set level')."],
+    ['safety', "The GX manual warns not to use some GX features (such as certain limit options) in systems that use the Ignore AC input settings: the AC input relay logic and the GX logic can fight each other."],
+    ['qc', { q:"In a Two-Signal BMS assistant installation, what does the 'switch to float' option on cell over-voltage achieve?", o:["It permanently disables the inverter", "It stops charge without fully switching the charger off, reducing needless cycling", "It increases absorption voltage", "It opens the DC fuse"], a:1, e:"Switch to float, with float set below the battery's actual voltage, stops charging while keeping the unit running." }]
+  ]},
+  { id:'i8', title:'Phoenix and Inverter Smart: stand-alone inverters', level:'Intermediate', min:9, src:['invs'], body:[
+    ['p', "Not every boat needs a charger-inverter. The Phoenix / Inverter Smart family is <b>inverter only</b>: DC in, AC out, with VE.Direct and (on Smart models) Bluetooth for configuration through VictronConnect."],
+    ['ul', ["<b>Safety class I:</b> the chassis must be grounded; a grounding point is provided on the outside.", "<b>ECO mode:</b> cuts the idle consumption by about 85 % by going into standby when no load is connected; sensitivity is configurable. Very small loads can be missed.", "<b>Alarm LEDs:</b> overload, over-temperature, low battery voltage and high DC ripple warnings/alarms.", "<b>Remote on/off:</b> via a remote terminal/connector; the manual notes the output can also drive an alarm or extraction fan.", "<b>Configurable:</b> low-battery cut-off and restart levels, ECO mode on/off, ECO sensitivity and the low-battery alarm / charge-detect settings."]],
+    ['tip', "For motor loads (compressors, pumps) and power supplies, check the inverter's peak power rating and the start-up inrush: the Inverter Smart manual specifically lists electric motors, LED lamp converters and tools as hard starters."],
+    ['qc', { q:"Roughly how much does ECO mode cut the idle consumption of the Inverter Smart?", o:["5 %", "20 %", "About 85 %", "100 %"], a:2, e:"ECO mode reduces consumption by about 85 % by standing by when no load is present." }]
+  ]}
+  ]});

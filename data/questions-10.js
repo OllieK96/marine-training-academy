@@ -1,0 +1,20 @@
+TRAINING.addQuestions('nav', [
+ ["NMEA 0183 communication is:", ["Serial with one talker per output", "A CAN backbone", "An Ethernet network", "Wireless"], 0, "It is a point-to-point serial standard."],
+ ["What is the default baud rate for NMEA 0183?", ["4800", "250000", "115200", "300"], 0, "4800 baud is the standard speed."],
+ ["What speed does NMEA 2000 run at?", ["250 kbit/s", "4800 baud", "1 Gbit/s", "9600 baud"], 0, "NMEA 2000 is CAN-bus at 250 kbit/s."],
+ ["How many terminators does an NMEA 2000 backbone need?", ["Two", "One", "Three", "None"], 0, "One at each end of the backbone."],
+ ["What resistance do you expect between CAN-H and CAN-L with power off?", ["About 60 Ω", "About 120 Ω", "About 0 Ω", "Open circuit"], 0, "Two 120 Ω resistors in parallel."],
+ ["What reading suggests a missing terminator?", ["About 120 Ω", "About 60 Ω", "About 40 Ω", "About 5 Ω"], 0, "Only one terminator is in circuit."],
+ ["What reading suggests an extra terminator?", ["About 40 Ω", "About 60 Ω", "About 120 Ω", "About 0 Ω"], 0, "Three 120 Ω in parallel give 40 Ω."],
+ ["Which wire is CAN-H in an NMEA 2000 cable?", ["White", "Blue", "Red", "Black"], 0, "White is CAN-H, blue is CAN-L."],
+ ["How should the network power be fed?", ["One fused connection, ideally near the middle", "Multiple feeds along the backbone", "No power needed", "Only at the ends"], 0, "A single fused power feed prevents ground loops."],
+ ["What is the typical maximum length of a single NMEA 2000 drop cable?", ["About 6 m", "About 60 m", "About 0.6 m", "Unlimited"], 0, "Drop cables are kept short, up to about 6 m."],
+ ["What is the minimum voltage typically expected at the furthest device?", ["About 9 V", "About 3 V", "About 24 V", "About 0 V"], 0, "Devices need at least about 9 V to operate reliably."],
+ ["What does LEN stand for?", ["Load Equivalency Number", "Line Extension Node", "Low Energy Network", "Local Ethernet Node"], 0, "LEN indicates current draw in units of 50 mA."],
+ ["Raymarine's NMEA 2000 compatible network is called:", ["SeaTalkNG", "VE.Can", "MasterBus", "SimNet"], 0, "SeaTalkNG is Raymarine's NMEA 2000 compatible network."],
+ ["Which network type usually carries radar and sonar data between displays?", ["Ethernet", "NMEA 0183", "VE.Direct", "A single wire"], 0, "High-bandwidth data uses Ethernet-based networks."],
+ ["What does CZone use as its data network?", ["NMEA 2000", "NMEA 0183", "Wi-Fi", "VE.Direct"], 0, "CZone operates over NMEA 2000."],
+ ["What must match for CZone modules to work properly?", ["Addresses and the configuration file", "Colour of the cable", "Brand of battery", "VHF channel"], 0, "Modules must be addressed correctly and the configuration loaded."],
+ ["A CZone output shows ON but the load has no power. What do you measure first?", ["Voltage at the output terminal and the load", "GPS signal", "VHF volume", "Compass"], 0, "It separates module faults from wiring faults."],
+ ["Which statement about integrated automation systems like Böning or Naviop is correct?", ["Which system is fitted depends on model and year", "All boats use the same system", "They never have configuration", "They do not use networks"], 0, "Always check the build documents and manuals for the boat."]
+]);

@@ -1,0 +1,47 @@
+TRAINING.addModule({ id:'shore', title:'Shore Power, Generators & Isolation', icon:'🔌',
+  summary:'Shore inlets and RCDs, galvanic isolators, isolation transformers, ATS/changeover switching and generator overview (Onan, Kohler, Fischer Panda).',
+  lessons:[
+  { id:'s1', title:'Shore power inlets, protection and polarity', level:'Foundation', min:11, body:[
+    ['p', "A shore power installation starts at the marina pedestal and ends at your AC loads. Every step in the chain is there for a reason."],
+    ['ol', ["<b>Pedestal:</b> marina supply with its own breaker and RCD (varies by marina).", "<b>Shore lead:</b> a flexible marine-rated cable suited to the current and the environment.", "<b>Boat inlet:</b> a weatherproof socket with a locking collar, mounted high and drained.", "<b>Isolation / protection:</b> galvanic isolator or isolation transformer, then main breaker and RCD.", "<b>Distribution:</b> AC switchboard with circuit breakers feeding each load group."]],
+    ['spec', 'Typical protection devices', [['Main shore breaker', 'Double-pole breaker that isolates active and neutral and protects the boat wiring'], ['RCD (30 mA)', 'Detects leakage and trips to protect people from electric shock'], ['Polarity indicator', 'Shows whether active and neutral are connected correctly at the inlet']]],
+    ['h', 'Common marina issues'],
+    ['ul', ["Corroded or burnt pins and sockets – high resistance causes heat and voltage drop. Check for discolouration and melted plastic.", "Leads pulled hard or left lying in water – damage to insulation can lead to leakage and tripped RCDs.", "Reversed polarity at the pedestal – some boats have a polarity warning light or protective relay.", "Shared supplies – marinas may supply many boats from one feeder, so high demand can lower voltage."]],
+    ['tip', "Ask the owner to always turn the boat's shore breaker off before plugging or unplugging and to inspect the cable ends regularly for heat damage."],
+    ['safety', "Never work on a boat's AC system with shore power connected. Verify dead with a tested meter and use lock-out tags where possible."],
+    ['qc', { q:"Why should a boat's shore inlet be mounted high and drained?", o:["To keep water out and avoid leakage and corrosion", "For appearance", "To reduce voltage", "To save cable"], a:0, e:"Water at the connection causes corrosion, leakage and RCD trips." }]
+  ]},
+  { id:'s2', title:'Galvanic isolators and isolation transformers', level:'Intermediate', min:12, body:[
+    ['p', "When a boat is connected to shore power, its green/yellow earth wire connects the vessel's metal underwater fittings to the marina's earth system and every other boat on it. That can create a galvanic cell and corrosion currents. Two devices deal with this."],
+    ['table', ['Device', 'How it works', 'Pros', 'Cons'], [['Galvanic isolator', 'Diodes in the earth wire block small DC voltages (typically below about 1.2 V) but pass AC fault current', 'Simple, compact, low cost', 'Does not stop all stray current; diodes can fail; should be monitored'], ['Isolation transformer', 'Windings completely separate boat AC from shore; boat side gets its own neutral-earth bond', 'Total galvanic isolation; improves shock safety; can also adjust voltage', 'Heavy, expensive, requires correct sizing and ventilation']]],
+    ['h', 'Isolation transformer details'],
+    ['ul', ["The secondary neutral is bonded to earth <b>at the transformer</b>, creating a new local source.", "Transformers must be sized for the vessel's load, including surge currents from air-conditioning.", "Thermal protection or output breaker trips when overloaded or if airflow is blocked.", "Reverse polarity at the marina does not affect the boat's secondary side."]],
+    ['h', 'Galvanic isolator details'],
+    ['ul', ["Fit it in series with the earth conductor between the shore inlet and the boat's bonding.", "Choose a model that has a fault-safe capacity to carry fault current and an indicator for diode failure.", "Test it periodically: a failed diode can leave the boat without isolation, or in rare cases leave earth open."]],
+    ['tip', "If anodes are wasting quickly in a marina, suspect the shore connection first. Try disconnecting shore power for a few days and compare, then check isolator or transformer function."],
+    ['qc', { q:"Where is the neutral-earth bond made when an isolation transformer is used?", o:["At the transformer secondary", "At the marina pedestal only", "At every outlet", "Nowhere"], a:0, e:"The transformer creates a new source, so neutral is bonded to earth at its secondary." }]
+  ]},
+  { id:'s3', title:'Generators, ATS and changeover switching', level:'Intermediate', min:13, body:[
+    ['p', "Cruisers commonly carry a diesel generator. Familiar names include <b>Onan (Cummins Onan)</b>, <b>Kohler</b> and <b>Fischer Panda</b>. Onan and Kohler are typically fixed-speed units (e.g. 1500 rpm for 50 Hz output). Fischer Panda generators are variable-speed with an inverter stage that controls output."],
+    ['table', ['Type', 'Characteristics'], [['Fixed-speed (Onan, Kohler)', 'Runs at constant engine speed to give 50 Hz; robust, simple; noise and fuel use fairly constant'], ['Variable-speed inverter (Fischer Panda)', 'Engine speed varies with load; quieter and more efficient at light loads; electronics add complexity']]],
+    ['h', 'What you check on a generator'],
+    ['ul', ["<b>Start battery:</b> dedicated or shared; voltage during crank.", "<b>Cooling:</b> raw water pump impeller, strainer, heat exchanger; overheating is a leading cause of faults.", "<b>Exhaust:</b> waterlock and exhaust elbow; carbon monoxide risk.", "<b>Controls:</b> start panel, safety switches (oil pressure, temperature), remote start via system controllers.", "<b>Output:</b> voltage and frequency, breaker, neutral/earth arrangement."]],
+    ['h', 'ATS and changeover'],
+    ['p', "An automatic transfer switch (ATS) or manual changeover ensures that the vessel is connected to only one source at a time: shore <b>or</b> generator <b>or</b> inverter. It must be a <b>break-before-make</b> design and normally switches both active and neutral."],
+    ['ul', ["Never allow two sources to be paralleled by accident.", "Check that interlocks work: for manual systems, key or mechanical interlock.", "Verify the neutral-earth bonding arrangement after any change."]],
+    ['safety', "Carbon monoxide from generators and engines is deadly. Ensure exhaust systems are leak-free, and fit working CO detectors in accommodation spaces."],
+    ['qc', { q:"Why must a changeover switch be break-before-make?", o:["To prevent two sources being connected at once", "To save power", "To reduce noise", "To save cable"], a:0, e:"Paralleling shore and generator is dangerous and damaging." }]
+  ]},
+  { id:'s4', title:'RCD testing, neutral bonding and fault-finding', level:'Advanced', min:14, body:[
+    ['h', 'RCD testing'],
+    ['p', "RCDs must be tested regularly. The simple push-button test proves the mechanism works, but a proper RCD tester measures the actual trip current and time. In Australia common test criteria for a 30 mA RCD are no trip at half rated current, trip within about 300 ms at rated current and within about 40 ms at five times rated current – check the testing standard applicable to your work."],
+    ['h', 'Nuisance RCD trips'],
+    ['ul', ["<b>Earth leakage from appliances:</b> water heaters, battery chargers with filters and air-conditioning can each leak a few mA. Combined, they can reach the trip level.", "<b>Damp wiring or connectors:</b> insulation resistance falls with moisture.", "<b>Neutral-earth bonding errors:</b> a second bond downstream shares neutral current through the earth conductor.", "<b>Generator or inverter neutral bonding:</b> when a source also bonds neutral to earth while shore power also does, current splits and RCDs trip."]],
+    ['h', 'Fault-finding method'],
+    ['steps', ["Isolate and identify which circuit trips by switching circuits off, then on one by one.", "Use an insulation resistance tester (typically at 500 V) on the isolated circuit; disconnect electronics first. The result should be well above 1 MΩ.", "Check neutral-earth isolation between neutral and earth with the circuit isolated.", "Inspect the heating elements, connectors and any deck-mounted outlets for moisture.", "Check polarity and earth continuity with an appropriate tester."]],
+    ['spec', 'Test equipment you will need', [['Multimeter (CAT rated)', 'Voltage, continuity, resistance'], ['Insulation tester', 'Insulation resistance, typically 500 V DC'], ['RCD tester', 'Trip current and trip time'], ['Earth/loop tester', 'Earth continuity and impedance (as appropriate)']]],
+    ['tip', "When an RCD trips only with a specific appliance on, measure leakage with a clamp meter designed for low currents around the active and neutral together (or the earth conductor)."],
+    ['safety', "Insulation resistance tests apply 500 V DC. Disconnect electronic equipment and isolate the circuit first, and warn others on board."],
+    ['qc', { q:"Why can a second neutral-earth bond cause an RCD to trip?", o:["Neutral current returns via the earth path, unbalancing the RCD", "It increases voltage", "It changes the frequency", "It lowers resistance of the battery"], a:0, e:"Neutral current flowing in the earth conductor makes the RCD see an imbalance." }]
+  ]}
+]});

@@ -1,0 +1,20 @@
+TRAINING.addQuestions('trim', [
+ ["Lowering both trim tabs generally does what to the boat?", ["Lifts the stern and lowers the bow", "Lifts the bow", "Slows the engine", "Turns the boat"], 0, "The tabs deflect water down, pushing the stern up."],
+ ["How do you correct a list to port using tabs?", ["Lower the port tab", "Lower the starboard tab", "Raise both", "Turn off the engine"], 0, "Lowering the port tab raises the port side."],
+ ["What should you do with trim tabs when docking or going astern?", ["Fully retract them", "Fully deploy them", "Half deploy them", "Disconnect the batteries"], 0, "Tabs should be retracted to avoid damage and drag."],
+ ["Which technology uses a hydraulic power unit and cylinders on tabs?", ["Hydraulic trim tab systems", "Electric screw actuators", "Gyro stabilisers", "Solar chargers"], 0, "Some Bennett systems are hydraulic."],
+ ["One trim tab is slow. What should you measure first?", ["Voltage at the actuator under load", "VHF volume", "Compass heading", "Water depth"], 0, "Voltage drop is a common cause."],
+ ["What is the number one killer of electric actuators?", ["Water ingress", "Low tide", "Paint", "Bright sun"], 0, "Moisture corrodes connectors and motors."],
+ ["Interceptors are best described as:", ["Blades that extend vertically from the transom", "Hinged plates", "Rotating fins", "Hull coatings"], 0, "They create a pressure wedge to lift the stern."],
+ ["What do interceptor controllers use for automatic control?", ["Pitch and roll sensors and speed data", "Wind sensors only", "Anchor sensors", "Fuel sensors"], 0, "Attitude sensors drive the automatic mode."],
+ ["Humphree and Zipwake are examples of:", ["Interceptor systems", "Generators", "Autopilots", "Battery makers"], 0, "Both make interceptor-based trim systems."],
+ ["Persistent heavy tab use can indicate:", ["A trim or weight distribution problem elsewhere", "A faulty radio", "A flat battery", "Low tide"], 0, "Tabs may hide propeller or load problems."],
+ ["A Seakeeper gyro stabiliser contains:", ["A flywheel spinning in a vacuum enclosure", "A diesel engine", "A solar panel", "A heat pump"], 0, "A high-speed flywheel and gimbal produce counter-torque."],
+ ["Why must cooling continue after power is removed from a gyro?", ["It keeps spinning and the bearings generate heat", "To charge the battery", "For appearance", "It does not need cooling"], 0, "Spin-down takes a long time."],
+ ["Which type of stabiliser can work at anchor?", ["Gyro stabiliser", "Standard fin stabiliser (underway only)", "Trim tabs", "Rudders"], 0, "Gyros use flywheel precession and do not need boat speed."],
+ ["Fin stabilisers typically use:", ["Hydraulic actuators controlled by a sensor-based controller", "Solar power only", "Compressed air", "Wind"], 0, "Fins are moved hydraulically on controller commands."],
+ ["Why should a technician isolate power before working near the transom tabs?", ["Moving tabs can trap fingers, hands and lines", "To save fuel", "To reduce noise", "To cool the engine"], 0, "Actuators are powerful."],
+ ["What is the first check if neither trim tab works?", ["Fuse/breaker and supply voltage at the control box", "Compass", "Anchor light", "GPS"], 0, "A common cause is loss of power."],
+ ["After replacing a tab actuator, what is often necessary?", ["Recalibration of travel limits and indicators", "Replace the engine", "New autopilot", "Change antifoul"], 0, "Limits and position feedback must be set."],
+ ["Why can a gyro stabiliser draw high current during spin-up?", ["Accelerating the flywheel needs significant power", "It charges batteries", "It heats the water", "It powers the radio"], 0, "Cable size and supply voltage must suit the spin-up current."]
+]);

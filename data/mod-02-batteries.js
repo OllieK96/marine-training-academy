@@ -1,0 +1,64 @@
+TRAINING.addModule({ id:'batt', title:'Batteries & Charging', icon:'🔋',
+  summary:'Lead-acid, AGM and LiFePO4 chemistry, BMS, alternators and external regulators, DC-DC chargers, solar MPPT, isolators and battery bank design.',
+  lessons:[
+  { id:'b1', title:'Battery chemistries and how to read them', level:'Foundation', min:12, interactive:true, body:[
+    ['p', "Boats use batteries for two very different jobs. A <b>starting battery</b> delivers a huge burst of current for a few seconds. A <b>house (deep-cycle) battery</b> delivers modest current for hours and is designed to be regularly discharged. Mixing them up is a classic cause of short battery life."],
+    ['table', ['Type', 'Typical usable capacity', 'Cycle life (indicative)', 'Notes'], [['Flooded lead-acid', '~50%', 'Hundreds of cycles', 'Needs topping up with water and ventilation for hydrogen gas'], ['AGM', '~50%', 'Hundreds of cycles', 'Sealed, vibration resistant, sensitive to over-charge'], ['Gel', '~50%', 'Hundreds of cycles', 'Needs lower charge voltages; less common today'], ['LiFePO4 (lithium iron phosphate)', '80–100%', 'Thousands of cycles', 'Light, flat voltage curve, needs a BMS and correct charge limits']]],
+    ['h', 'Reading battery voltage'],
+    ['p', "For lead-acid batteries at rest, voltage gives a rough state of charge: about 12.7 V is full, 12.4 V is roughly 75%, 12.2 V roughly 50% and 12.0 V roughly 25%. Surface charge after charging or discharge distorts the reading – let the battery rest at least several hours. <b>For lithium, voltage is a poor indicator</b>: LiFePO4 stays almost flat between about 20% and 90% charge, so you need a shunt-based battery monitor."],
+    ['spec', 'Cell voltages (nominal)', [['Lead-acid cell', '2 V → 12 V battery has 6 cells'], ['LiFePO4 cell', '3.2 V → 4 cells in series = 12.8 V nominal'], ['24 V LiFePO4', '8 cells in series = 25.6 V nominal'], ['Capacity', 'Amp-hours (Ah) – energy (Wh) = Ah × volts']]],
+    ['h', 'Peukert effect'],
+    ['p', "Lead-acid batteries deliver less total capacity when discharged quickly (Peukert exponent typically about 1.1–1.3). Lithium is much closer to ideal (about 1.05). That is why a 100 Ah AGM bank powering a 2 kW inverter will last far less than 100 ÷ 160 hours."],
+    ['int', 'sp'],
+    ['tip', "When replacing batteries, replace the whole bank. A single weak or old battery in a bank drags the others down and shortens their life."],
+    ['safety', "Flooded batteries produce explosive hydrogen gas while charging. Keep sparks and flames away and make sure battery boxes are ventilated according to the standard."],
+    ['qc', { q:"Why is battery voltage a poor way to estimate state of charge on a LiFePO4 battery?", o:["Lithium has no voltage", "The voltage curve is very flat across most of the charge range", "It changes every minute", "It is always 14.4 V"], a:1, e:"LiFePO4 voltage barely changes between roughly 20% and 90% SoC, so a shunt is needed." }]
+  ]},
+  { id:'b2', title:'Charging stages and charge profiles', level:'Foundation', min:10, interactive:true, body:[
+    ['p', "A good charger is more than a voltage source. It moves the battery through <b>stages</b> designed to fill it quickly without damaging it."],
+    ['ol', ["<b>Bulk:</b> the charger delivers its maximum current until the battery reaches the absorption voltage. Most of the energy goes in here.", "<b>Absorption:</b> the voltage is held constant while current tapers. The remaining few percent of capacity are added.", "<b>Float / maintenance:</b> voltage drops to a lower value to hold the battery full without gassing or overcharging."]],
+    ['int', 'charge'],
+    ['spec', 'Typical 12 V set-points (always use the battery maker\'s values)', [['Flooded lead-acid', 'Absorption ~14.4–14.8 V, float ~13.2–13.8 V'], ['AGM', 'Absorption ~14.4–14.7 V, float ~13.5 V'], ['LiFePO4', 'Charge to ~14.2–14.6 V; a float is optional, often ~13.5 V or the charger just stops']]],
+    ['h', 'Temperature compensation'],
+    ['p', "Lead-acid batteries need lower charge voltage when hot and higher when cold. A common compensation is about –3 mV per °C per cell (roughly –18 mV/°C on a 12 V battery). A battery temperature sensor lets the charger do this automatically. <b>Lithium</b> uses a different rule: it must not be charged when the cell temperature is below about 0 °C unless the manufacturer allows it or the battery has internal heating."],
+    ['h', 'Why batteries are never fully charged'],
+    ['ul', ["Chargers shut down before absorption completes because of time limits or incorrect profiles.", "Voltage drop in the charging cable means the battery sees lower voltage than the charger – the charger believes it has finished.", "Loads running during charging steal current. The charger sees the voltage and tapers while the battery is not actually full."]],
+    ['tip', "Always check battery voltage at the battery terminals while charging, and compare to the voltage at the charger. A difference of more than a couple of tenths of a volt indicates a cable or connection problem."],
+    ['qc', { q:"What happens during the absorption stage?", o:["Voltage is held constant while current tapers", "Current is held constant while voltage tapers", "The battery is disconnected", "The charger turns off"], a:0, e:"In absorption the charger holds the set voltage and the current falls as the battery fills." }]
+  ]},
+  { id:'b3', title:'Lithium, BMS, alternators and DC-DC chargers', level:'Intermediate', min:14, interactive:true, body:[
+    ['p', "A lithium battery has an internal <b>BMS (battery management system)</b> which balances cells and protects against over-voltage, under-voltage, over-current, short circuit and over/under temperature. If something goes outside the limits, the BMS can disconnect the battery, instantly removing it from the system. That has important consequences for the rest of the boat."],
+    ['ul', ["A BMS disconnect while an alternator is running can cause a dangerous voltage spike (load dump) that damages electronics. Most lithium systems use a regulated DC-DC charger or an alternator protection device to prevent that.", "A BMS disconnect on a thruster or windlass circuit can cause a blown inverter or contactor if inductive loads are switched off suddenly.", "Always follow the battery maker's wiring diagrams. Some BMSs need a precharge when connecting capacitive loads, such as inverters."]],
+    ['h', 'Alternators and regulators'],
+    ['p', "A standard marine alternator has a built-in regulator that typically targets about 14.2–14.4 V for lead-acid. When connected to a deeply discharged lithium bank, the alternator runs flat-out for long periods and can overheat. Solutions are:"],
+    ['ul', ["<b>DC-DC charger:</b> sits between the alternator/starter battery and the lithium battery. It provides a controlled, current-limited charge and prevents the lithium battery from loading the alternator without limits.", "<b>External (programmable) regulator:</b> e.g. Mastervolt Alpha Pro or similar types that monitor alternator temperature, limit field current and run multi-stage charge profiles.", "<b>Battery sense wire:</b> a voltage-sense lead to the battery so the regulator sees the real battery voltage and compensates for cable drop."]],
+    ['int', 'flow'],
+    ['tip', "If an alternator belt squeals or the alternator becomes too hot to touch after switching to lithium, you need current limiting on the alternator output – do not just fit a bigger alternator."],
+    ['safety', "Never disconnect a battery while the engine and alternator are running. On lithium systems, check the maker's rule for the order in which to connect and disconnect batteries."],
+    ['qc', { q:"Why is a DC-DC charger often used between an alternator and a lithium bank?", o:["To raise the alternator speed", "To limit alternator load and provide a controlled charge profile", "To replace fuses", "To reduce battery capacity"], a:1, e:"Lithium accepts high current, which can overheat a standard alternator; a DC-DC charger limits current and applies the correct profile." }]
+  ]},
+  { id:'b4', title:'Solar MPPT, battery isolators and combiners', level:'Intermediate', min:12, interactive:true, body:[
+    ['h', 'Solar MPPT controllers'],
+    ['p', "An MPPT (maximum power point tracking) controller converts the panel's high voltage to battery voltage and keeps the array at its most efficient operating point. A rule of thumb is that a good MPPT is about 96–98% efficient. Key ratings:"],
+    ['ul', ["<b>Maximum PV input voltage (Voc):</b> never exceed it. Cold weather increases panel voltage, so calculate string voltage at the lowest expected temperature.", "<b>Maximum charge current:</b> the output current limit; panel wattage ÷ battery voltage should not exceed it too much.", "<b>Battery profile:</b> set it for the chemistry (lithium vs AGM)."]],
+    ['h', 'Battery isolators and combiners'],
+    ['table', ['Device', 'How it works', 'Considerations'], [['Diode isolator', 'Diodes allow charge to multiple batteries but block back-flow', 'Voltage drop (0.4–0.7 V) can leave batteries under-charged'], ['Voltage-sensitive relay (VSR / ACR)', 'Closes when charge voltage appears, opens when it falls', 'Simple; set points matter, especially with lithium'], ['FET / Argo isolators', 'Low-drop semiconductor isolation', 'Better charge voltage than diodes'], ['DC-DC charger', 'Isolated and current-limited transfer', 'Best for mixed chemistries']]],
+    ['h', 'Battery bank sizing'],
+    ['p', "Sizing a bank starts with an energy audit: list each load, its power and how many hours per day it runs. Add up the watt-hours, divide by voltage to get amp-hours, then allow for depth of discharge, days of autonomy and ageing."],
+    ['int', 'bank'],
+    ['tip', "Don't forget the inverter's own idle consumption and the peak currents it demands. A 3 kW 12 V inverter can draw close to 300 A when fully loaded – this determines your cable, fuse and battery size."],
+    ['qc', { q:"What is the main drawback of a diode battery isolator?", o:["Cost", "Voltage drop that can leave batteries under-charged", "It cannot handle current", "It needs an engine"], a:1, e:"A diode drops roughly 0.4–0.7 V, so the battery sees less than the charger voltage." }]
+  ]},
+  { id:'b5', title:'Designing and protecting a battery system', level:'Advanced', min:14, body:[
+    ['p', "A professional installation treats the battery bank as the heart of the boat, and designs everything around keeping it safe and healthy."],
+    ['h', 'Design checklist'],
+    ['steps', ["Calculate the energy needed and the peak current.", "Select battery type, voltage and capacity, allowing for temperature and ageing.", "Select the main fuse/Class T and cable to carry peak current within voltage-drop limits.", "Plan charging: shore charger, alternator (via DC-DC or regulator), solar.", "Plan monitoring: a shunt on the battery negative so that all current is measured.", "Provide isolation (battery switches) and emergency disconnect arrangements.", "Document the system with a schematic and settings sheet."]],
+    ['h', 'Paralleling and balancing'],
+    ['ul', ["Connect parallel batteries with equal-length cables and take the main positive and negative from <i>opposite ends</i> of the bank so current shares evenly.", "Never mix old and new batteries, different capacities or different chemistries in the same bank.", "For lithium in parallel, follow the manufacturer's rules on voltage matching before connection to avoid big equalising currents."]],
+    ['h', 'Charge-source coordination'],
+    ['p', "Multiple chargers (shore, alternator, solar) fight each other if they have different set-points. Choose compatible profiles. Where a BMS or system controller offers it, use a communication link so every charger follows the BMS's current and voltage limits."],
+    ['spec', 'Common mistakes to avoid', [['Shunt bypassed', 'A negative wire connected directly to the battery negative post means the monitor never sees the current.'], ['Mixed chemistry', 'A lead-acid starter charged on lithium profile voltages overheats and boils.'], ['No fuses at the battery', 'Unprotected cable is the cause of most boat fires.'], ['Loose lugs', 'Cause heat, voltage drop and failures; torque to spec and check periodically.']]],
+    ['safety', "Lithium batteries can go into thermal runaway if damaged, over-charged or short-circuited. Follow the manufacturer's rules, install them in a suitable location and use correct fusing."],
+    ['qc', { q:"Why should the main positive and negative cables of a parallel bank be connected at opposite ends?", o:["It looks neat", "It equalises the resistance path so batteries share current evenly", "It increases voltage", "It is required for solar"], a:1, e:"This balances the cable resistance seen by each battery in the bank." }]
+  ]}
+]});

@@ -1,0 +1,20 @@
+TRAINING.addQuestions('victron', [
+ ["What does MultiPlus 12/3000/120-50 indicate about the charger?", ["120 A maximum charge current", "120 V input", "Weight 120 kg", "120 W idle"], 0, "The third number is the charge current in amps."],
+ ["Which Victron device has two AC inputs?", ["MultiPlus", "Quattro", "Phoenix", "SmartShunt"], 1, "The Quattro is designed for shore and generator inputs."],
+ ["What does a SmartSolar 100/30 mean?", ["100 V max PV input and 30 A max charge current", "100 W and 30 V", "100 Ah and 30 A", "100 m cable and 30 mm"], 0, "The two numbers are max PV voltage and max charge current."],
+ ["Which tool is used to configure a MultiPlus via the VE.Bus interface?", ["VEConfigure with an MK3-USB", "VRM only", "Web browser only", "Garmin app"], 0, "VEConfigure with the MK3-USB interface programs VE.Bus products."],
+ ["Which communications link connects a SmartSolar MPPT to a Cerbo GX?", ["VE.Direct", "NMEA 0183", "VE.Bus", "Ethernet"], 0, "Solar chargers and shunts use VE.Direct."],
+ ["Which network needs a terminator at both ends?", ["VE.Can", "VE.Direct", "USB", "Bluetooth"], 0, "VE.Can is a CAN-bus."],
+ ["What is the danger of plugging a VE.Bus RJ45 into an Ethernet port?", ["It is not compatible and can damage equipment", "Nothing", "It increases speed", "It enables VRM"], 0, "The ports use the same connector but different signalling."],
+ ["What does DVCC do?", ["Coordinates charge limits across the system via the GX", "Measures AC", "Controls the anchor", "Sets language"], 0, "Distributed Voltage and Current Control lets the GX device limit chargers."],
+ ["What is VRM?", ["Victron's online portal for monitoring and alarms", "A fuse type", "A cable", "A kind of inverter"], 0, "VRM is the Victron Remote Management portal."],
+ ["Which feature lets the inverter add battery power when the AC load exceeds the shore limit?", ["PowerAssist", "VE.Smart", "UPS", "ESS"], 0, "PowerAssist supplements limited shore/generator power."],
+ ["Why set the AC input current limit?", ["To avoid tripping the shore breaker", "To increase battery size", "To save VRM data", "To change frequency"], 0, "It makes the unit adjust charging/PowerAssist to stay within the supply limit."],
+ ["The SmartShunt reads SoC wrongly because a load is wired to the battery side of the shunt. Why?", ["The current bypasses the shunt and is not measured", "Shunts only measure voltage", "The load is too large", "Shunt firmware"], 0, "All current must pass through the shunt for accurate SoC."],
+ ["What should the battery monitor's 'charged voltage' be relative to the charger's float voltage?", ["Slightly below the float voltage", "Far above", "Equal to 0 V", "Equal to AC voltage"], 0, "It must be reachable so the monitor can sync to 100%."],
+ ["Which CAN-bus rate is used by Victron VE.Can?", ["250 kbit/s", "9600 baud", "1 Mbit/s", "4800 baud"], 0, "VE.Can runs at 250 kbit/s; CAN-bus BMS uses 500 kbit/s."],
+ ["What should be the first check when a MultiPlus shuts down on load?", ["Battery voltage at the inverter terminals under load", "Router status", "VRM time zone", "Language setting"], 0, "Voltage sag under load points to DC supply problems."],
+ ["Why take a settings backup before changes?", ["To return to a known baseline", "To increase battery capacity", "To remove firmware", "It is required by VRM"], 0, "A baseline lets you undo mistakes."],
+ ["A Quattro will not charge from shore but the generator input works. What is a likely cause?", ["The AC input priority / current limit for shore is set wrongly", "The battery is lithium", "VRM is offline", "The GX is missing"], 0, "Check input source selection and current limit settings for each input."],
+ ["Which connection type do Orion DC-DC chargers help with?", ["Charging the house bank from alternator or other DC source", "Converting AC to DC", "Measuring current", "Connecting to Wi-Fi"], 0, "Orion DC-DC converters charge a bank from another DC source with a controlled profile."]
+]);

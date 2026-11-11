@@ -1,0 +1,39 @@
+TRAINING.addModule({ id:'nav', title:'Navigation, Networks & Digital Switching', icon:'🛰️',
+  summary:'NMEA 0183 and 2000, Garmin/Raymarine/Simrad networks, CZone digital switching and integrated automation systems such as Böning and Naviop style systems.',
+  lessons:[
+  { id:'n1', title:'NMEA 0183 and the move to NMEA 2000', level:'Foundation', min:11, body:[
+    ['p', "<b>NMEA 0183</b> is an older serial standard: one device (the talker) sends text sentences, and up to a few listeners can receive. It uses a differential serial link (typically 4800 baud, 38400 for high-speed) and sentences such as <code>$GPGGA</code> that begin with a talker ID and end with a checksum. You still meet it on older instruments and some AIS and VHF links."],
+    ['table', ['Feature', 'NMEA 0183', 'NMEA 2000'], [['Topology', 'Point-to-point, one talker per port', 'Shared backbone with many devices'], ['Speed', '4800 or 38400 baud', '250 kbit/s CAN bus'], ['Wiring', 'Twisted pair per link', 'Backbone, T-pieces and drop cables with power'], ['Data', 'Text sentences', 'Binary messages (PGNs)'], ['Power', 'Separate', 'Network carries 12 V for low-power devices']]],
+    ['ul', ["Wire talker output A/B (also called + / –) to listener input A/B; mixing them up gives no data.", "If a device shows no data, check baud rate, wiring polarity and whether the receiving port is set to the right input format.", "Converters (gateways) exist to join 0183 devices into an NMEA 2000 network."]],
+    ['tip', "A cheap tool for 0183 diagnosis is a PC with a serial or USB adapter and a terminal programme: you can watch the sentences arrive."],
+    ['qc', { q:"Which statement about NMEA 0183 is correct?", o:["Point-to-point serial with one talker per port", "Shared CAN backbone", "Uses Ethernet", "Carries 12 V power"], a:0, e:"NMEA 0183 is a serial standard with one talker per output." }]
+  ]},
+  { id:'n2', title:'Building and testing an NMEA 2000 network', level:'Foundation', min:13, interactive:true, body:[
+    ['p', "NMEA 2000 is a CAN-bus network. A <b>backbone</b> runs through the boat; each device connects with a T-piece directly or through a <b>drop cable</b>. Typical rules:"],
+    ['ul', ["<b>Two terminators</b> of 120 Ω – one at each end of the backbone.", "<b>One power feed</b> connection, ideally near the middle of the backbone, protected with a fuse. Only one connection of network negative to the boat negative.", "<b>Drop cables</b> are short: typically up to 6 m each, and the sum of all drops is limited.", "<b>Load Equivalency Number (LEN):</b> each device draws a number of 50 mA units; total load and voltage at the far end should be calculated (aim for at least ~9 V at the farthest device).", "<b>Mixed cable sizes:</b> heavy (Mid) backbone and light (Mini) drops; connector and cable type must be compatible."]],
+    ['table', ['Wire colour', 'Function'], [['Red', '+12 V'], ['Black', 'Negative'], ['White', 'CAN-H'], ['Blue', 'CAN-L'], ['Bare', 'Shield']]],
+    ['int', 'n2k'],
+    ['h', 'Test sequence'],
+    ['steps', ["Power off the network and measure resistance between CAN-H and CAN-L: expect about 60 Ω.", "Check CAN-H to CAN-L and CAN-H to negative for shorts or unexpected low resistance.", "Power on and measure voltage at the furthest device (≥ about 9 V under normal load).", "Check device list on an MFD for missing or duplicated devices.", "Wiggle-test connectors to find intermittent faults."]],
+    ['int', 'sim:n2k'],
+    ['qc', { q:"With power off, what should the resistance between CAN-H and CAN-L be on a healthy NMEA 2000 network?", o:["About 60 Ω", "About 120 Ω", "About 12 Ω", "About 1 kΩ"], a:0, e:"Two 120 Ω terminators in parallel give about 60 Ω." }]
+  ]},
+  { id:'n3', title:'Chartplotter networks: Garmin, Raymarine and Simrad', level:'Intermediate', min:12, body:[
+    ['p', "Most boats mix NMEA 2000 (data) with an Ethernet-style network (sonar, radar, charts). Each major brand has its own naming."],
+    ['table', ['Brand', 'Data network', 'High-bandwidth network', 'Notes'], [['Garmin', 'NMEA 2000, Garmin Marine Network (Ethernet)', 'Garmin Marine Network via RJ45', 'Garmin autopilots (e.g. Reactor) use their own control units'], ['Raymarine', 'SeaTalkNG (NMEA 2000 compatible), older SeaTalk', 'RayNet (Ethernet)', 'SeaTalkNG uses its own connectors; adaptors available'], ['Simrad / Navico', 'NMEA 2000, SimNet', 'Ethernet (e.g. Simrad network)', 'Simrad and B&G share a platform']]],
+    ['ul', ["<b>Ethernet networks</b> need a switch when more than two devices are present; use marine-rated cables and connectors.", "<b>Sources:</b> choose the correct data source on the MFD (e.g. a primary GPS and a heading source) so the network does not confuse.", "<b>Software:</b> keep MFD and sensors updated, but test before a long trip.", "<b>Device instances:</b> duplicates cause confusing displays – adjust the instance number to be unique."]],
+    ['tip', "A lot of 'chartplotter problems' are network power and termination issues. Test the NMEA 2000 backbone before replacing a display."],
+    ['qc', { q:"What is the Raymarine equivalent name for an NMEA 2000 compatible network?", o:["SeaTalkNG", "VE.Can", "MasterBus", "Garmin Marine Network"], a:0, e:"SeaTalkNG is Raymarine's NMEA 2000 compatible network." }]
+  ]},
+  { id:'n4', title:'CZone and integrated automation systems', level:'Advanced', min:14, interactive:true, body:[
+    ['p', "<b>Digital switching</b> replaces traditional switch panels with output modules controlled by a network. <b>CZone</b> is one of the best known: it uses NMEA 2000 as its data network, with output interface modules that switch DC loads and input modules that read switches. Large Australian cruisers may also use integrated automation and monitoring systems, such as <b>Böning</b> or <b>Naviop</b> style systems, with central controllers, I/O modules and touchscreens controlling lighting, pumps, tank monitoring and alarms. Which system is fitted depends on the model and build year."],
+    ['int', 'hot:n2k'],
+    ['h', 'Principles'],
+    ['ul', ["<b>Configuration is software:</b> output modules, modes and logic come from a configuration file. Keep a copy of the current file and know how to load it.", "<b>Addresses:</b> each module has a unique address (often by DIP switch settings) that must match the configuration.", "<b>Power:</b> modules need a stable supply; overload or low voltage causes odd behaviour.", "<b>Fusing:</b> the output module protects wiring only within its design; fuse circuits properly.", "<b>Modes:</b> scenes such as Dock, Anchor or Night switch groups of loads – useful, but confusing when something does not turn on.", "<b>Manual override:</b> know where the manual breakers and bypass switches for critical items are."]],
+    ['h', 'Fault-finding digital switching'],
+    ['steps', ["Check the module's status LEDs and supply voltage.", "Check the network (power, terminators, connectors).", "Confirm the configuration file is loaded and addresses match.", "Test the output manually using the touchscreen or configuration tool.", "Measure voltage at the load when the output is on – this separates software from wiring faults."]],
+    ['tip', "When a circuit does not work, measure at the module output terminal first, then at the load. A simple meter reading tells you whether the fault is in the system or the field wiring."],
+    ['safety', "Digital switching can energise circuits remotely. Always isolate the batteries before working on loads, even if the screen shows the circuit as off."],
+    ['qc', { q:"A CZone output shows ON on the screen, but a pump does not run. What should you measure first?", o:["Voltage at the module output and at the pump", "VHF channel", "GPS position", "Compass heading"], a:0, e:"Voltage readings show whether the issue is the module or the load wiring." }]
+  ]}
+]});

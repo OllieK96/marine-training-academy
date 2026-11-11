@@ -1,0 +1,20 @@
+TRAINING.addQuestions('fault', [
+ ["Which is the best first step in fault-finding?", ["Understand and verify the symptom", "Replace parts", "Clear codes", "Disconnect batteries"], 0, "Verification and understanding avoid wasted effort."],
+ ["What does 'divide and conquer' mean in fault-finding?", ["Test the middle of the circuit to split possibilities in half", "Replace everything", "Test only the load", "Ignore the wiring"], 0, "Each measurement eliminates half the circuit."],
+ ["What three things does every electrical device need?", ["Power, ground and signal/control", "Voltage, water and heat", "Fuse, wire and light", "Paint, bolts and tape"], 0, "If all three are present and it fails, the device is faulty."],
+ ["How is a voltmeter connected?", ["In parallel", "In series", "To earth only", "Across a fuse only"], 0, "Voltage is measured across two points."],
+ ["How should an ammeter be connected?", ["In series", "In parallel", "Across the battery", "To earth"], 0, "Current must flow through the meter."],
+ ["Which meter type measures DC current without breaking the circuit?", ["Hall-effect DC clamp meter", "AC-only clamp meter", "Test lamp", "Ohmmeter"], 0, "Only DC-capable clamps measure DC."],
+ ["Insulation resistance testing is normally done at:", ["500 V DC with equipment disconnected", "5 V with equipment connected", "12 V live", "230 V AC"], 0, "Disconnect electronics before testing."],
+ ["What is a typical minimum acceptable AC installation insulation resistance?", ["Above 1 MΩ", "Above 10 Ω", "Above 100 Ω", "Any value"], 0, "Healthy circuits read well above 1 MΩ."],
+ ["Which tool measures hull potential for stray current?", ["Reference electrode (Ag/AgCl)", "Clamp meter", "Test lamp", "Torque wrench"], 0, "A reference electrode compares hull potential to a standard."],
+ ["How do you test a connection for high resistance?", ["Measure voltage drop across it under load", "Measure resistance with power on", "Measure battery voltage at rest", "Smell it"], 0, "Live voltage-drop tests find hidden resistance."],
+ ["What approximate drop is acceptable across a single crimp under load?", ["A few tens of millivolts at most", "Several volts", "Half the battery voltage", "No limit"], 0, "Good connections drop very little voltage."],
+ ["How do you find a parasitic drain?", ["Measure standby current and switch circuits off one at a time", "Replace the battery", "Disconnect the alternator", "Add more batteries"], 0, "A step change identifies the circuit."],
+ ["What should you do before disconnecting wiring?", ["Photograph and label it", "Nothing", "Cut the wires", "Paint them"], 0, "It makes reassembly accurate."],
+ ["Why use a true-RMS meter on inverter output?", ["Waveforms are not pure sine waves", "It is cheaper", "It measures current", "It is lighter"], 0, "Average-responding meters misread non-sinusoidal waveforms."],
+ ["A transformer has voltage at its primary but not its secondary, and the thermal switch is tripped. What is the cause?", ["Thermal overload or output breaker tripped", "Marina fault", "Reverse polarity", "Inverter failure"], 0, "The transformer's own protection has operated."],
+ ["Why should the negative path be voltage-drop tested too?", ["A poor negative connection has the same effect as a poor positive", "It doesn't matter", "Negative carries no current", "It reduces cost"], 0, "Current flows through both conductors."],
+ ["What should you do after a repair?", ["Prove the fault is gone under the same conditions and document it", "Leave quietly", "Clear the logs", "Change another part"], 0, "Verification and documentation complete the job."],
+ ["What is the hazard of using a meter beyond its rating?", ["Meter failure or injury", "Better reading", "Lower noise", "None"], 0, "Use meters rated for the voltage and category."]
+]);

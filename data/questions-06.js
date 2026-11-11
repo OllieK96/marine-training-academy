@@ -1,0 +1,20 @@
+TRAINING.addQuestions('shore', [
+ ["Which device protects people from electric shock on boat AC circuits?", ["RCD", "Fuse only", "Diode", "Shunt"], 0, "An RCD trips when leakage is detected."],
+ ["What is a typical RCD trip rating for personal protection?", ["30 mA", "3 A", "300 A", "30 A"], 0, "30 mA RCDs are used for personal protection."],
+ ["What does a galvanic isolator block?", ["Small DC voltages in the earth wire", "All AC voltage", "Neutral current", "Radio signals"], 0, "It blocks DC corrosion voltages while passing AC fault current."],
+ ["What is the main advantage of an isolation transformer over a galvanic isolator?", ["Complete galvanic isolation of the boat AC from shore", "It is lighter", "It needs no sizing", "It replaces the RCD"], 0, "A transformer fully separates the circuits."],
+ ["Where is neutral bonded to earth in a boat with an isolation transformer?", ["At the transformer secondary", "At every power point", "Only at the pedestal", "Nowhere"], 0, "The secondary is a new source and needs its own bond."],
+ ["Which sources can a properly interlocked changeover connect at one time?", ["Only one", "Both shore and generator", "All three", "None"], 0, "Only one source should supply the vessel."],
+ ["What does 'break-before-make' mean?", ["The old source is disconnected before the new one connects", "The new source connects first", "Both stay connected", "The switch is a fuse"], 0, "It prevents momentary paralleling of sources."],
+ ["Which generator type typically runs at constant speed to give 50 Hz?", ["Fixed-speed (e.g. Onan or Kohler)", "Variable-speed inverter type", "Wind generator", "Alternator"], 0, "Fixed-speed units run at 1500 rpm for 50 Hz."],
+ ["What is a feature of Fischer Panda generators?", ["Variable engine speed with an inverter stage", "Hand cranking only", "No exhaust", "Fixed 3000 rpm only"], 0, "Fischer Panda uses variable speed with electronic output control."],
+ ["Which generator fault is a leading cause of overheating?", ["Raw water pump impeller or cooling problems", "Radio interference", "Wrong flag", "Low tide"], 0, "Cooling failures are the most common cause."],
+ ["Why fit carbon monoxide detectors on a vessel with a generator?", ["Exhaust can leak CO into accommodation", "For humidity", "For compass accuracy", "For battery health"], 0, "CO is odourless and deadly."],
+ ["What is the first step before working on a boat's AC wiring?", ["Isolate shore power and other sources and test dead", "Turn the generator on", "Remove the RCD", "Open the panel live"], 0, "Prove dead before touching."],
+ ["Insulation resistance tests are typically done at:", ["500 V DC with equipment disconnected", "5 V AC with equipment connected", "12 V DC live", "No test voltage"], 0, "Disconnect electronics before applying 500 V DC."],
+ ["A 30 mA RCD should trip within about what time at rated current under typical Australian test criteria?", ["300 ms", "3 minutes", "30 seconds", "Never"], 0, "Typical criteria: trip within 300 ms at IΔn."],
+ ["Which cause leads to nuisance RCD trips?", ["Combined small leakage currents from several appliances", "Too much battery capacity", "A larger anchor", "A faster boat"], 0, "Leakage adds up across circuits."],
+ ["Why can a second neutral-earth bond cause problems?", ["Neutral current flows in the earth path and unbalances RCDs", "It raises frequency", "It lowers battery voltage", "It speeds up the generator"], 0, "Only one neutral-earth bond should exist at a time."],
+ ["A marina cable plug shows melted plastic around one pin. What is likely?", ["High resistance connection from corrosion or loose contact", "Low voltage supply", "Wrong frequency", "Galvanic isolator failure"], 0, "Heat at a connection indicates high resistance."],
+ ["Which statement about isolation transformers is correct?", ["They must be sized for the surge loads of equipment such as air-con", "They never need ventilation", "They need no protection", "They increase frequency"], 0, "Overload or poor ventilation trips thermal protection."]
+]);
