@@ -27,7 +27,7 @@
   const INDEX = [];
   function blockText(b){
     const t = b[0];
-    if (t === 'p' || t === 'h' || t === 'tip' || t === 'safety' || t === 'note') return strip(b[1]);
+    if (t === 'p' || t === 'h' || t === 'tip' || t === 'safety' || t === 'note' || t === 'where' || t === 'verify') return strip(b[1]);
     if (t === 'tcode') return '';
     if (t === 'ul' || t === 'ol' || t === 'steps') return strip(b[1].join(' '));
     if (t === 'spec') return strip(b[1] + ' ' + b[2].map(r => r.join(' ')).join(' '));
@@ -162,6 +162,8 @@
       case 'tip': return callout('tip', '🔧 Field tip', b[1]);
       case 'safety': return callout('safety', '⚠ Safety', b[1]);
       case 'note': return callout('note', '★ Key point', b[1]);
+      case 'where': return callout('where', '📍 Where you\'ll see it', b[1]);
+      case 'verify': return callout('verify', '🔎 Verify before you rely on this', b[1]);
       case 'spec': return h('div', null, h('div', { class:'spec-title' }, b[1]), table(['Item', 'Detail'], b[2]));
       case 'table': return table(b[1], b[2]);
       case 'int': return interactive(b[1]);
@@ -171,7 +173,7 @@
     return h('div');
   }
   function sourceBox(keys){
-    const items = keys.map(k => { const s = (T.sources || {})[k]; if (!s) return null; return h('li', null, h('a', { href:s.u, target:'_blank', rel:'noopener' }, s.t), ' ', h('a', { class:'muted', href:'sources/' + s.f, target:'_blank', rel:'noopener' }, '(local copy)')); }).filter(Boolean);
+    const items = keys.map(k => { const s = (T.sources || {})[k]; if (!s) return null; return h('li', null, h('a', { href:s.u, target:'_blank', rel:'noopener' }, s.t), ' ', (s.f ? h('a', { class:'muted', href:'sources/' + s.f, target:'_blank', rel:'noopener' }, '(local copy)') : null)); }).filter(Boolean);
     return h('div', { class:'srcbox' }, h('b', { class:'l' }, '📚 Source'), h('p', { class:'hint', style:{ margin:'2px 0 6px' } }, 'Facts in this lesson are paraphrased from the manufacturer documents below. Check the current revision for the exact model and firmware.'), h('ul', null, items));
   }
   const callout = (cls, label, html) => h('div', { class:'callout ' + cls }, h('b', { class:'l' }, label), h('div', { html }));

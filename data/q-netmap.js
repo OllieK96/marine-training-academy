@@ -1,0 +1,23 @@
+TRAINING.addQ('netmap', [
+ ["What is a gateway?", "A unit that moves data from one bus to another", "A fuse", "A battery", "A cable", "Gateways translate between buses."],
+ ["Which bus carries radar, sonar and networked video?", "Ethernet (Marine Network)", "AC", "House DC", "NMEA 0183", "Ethernet-based marine network."],
+ ["Which bus carries GPS, depth, wind and digital switching data?", "NMEA 2000", "Ethernet", "AC", "Internet", "CAN-based instrument backbone."],
+ ["Which bus does a remote telematics gateway use to reach the cloud?", "Cellular or internet", "AC", "NMEA 0183", "VE.Bus", "Telematics uses cellular."],
+ ["Depth, wind and CZone screen buttons are all dead but radar is fine. Which bus?", "NMEA 2000", "Ethernet", "Internet", "AC", "Instruments and switching share NMEA 2000."],
+ ["A helm display reboots whenever the thruster runs. Which bus?", "House DC", "Ethernet", "Internet", "NMEA 0183", "A voltage dip on the DC supply."],
+ ["The phone app is offline but the boat works normally. Which bus?", "Internet / cellular", "House DC", "Control CAN", "AC", "Remote access is separate from the boat."],
+ ["DC loads are fine but the charger will not accept the shore supply. Which bus?", "AC", "NMEA 2000", "Ethernet", "Internet", "The AC side: inlet, RCD, changeover, polarity."],
+ ["The joystick and thrusters do nothing but wheel and engines work. Which bus?", "Control CAN", "Ethernet", "Internet", "AC only", "Joystick and thrusters use a control bus."],
+ ["Why should the Seakeeper Ride CAN not be joined to the boat NMEA 2000?", "It is a proprietary bus and mixing causes faults 1024 and 1040", "It would speed up the boat", "It is required", "It uses AC", "Per the Ride troubleshooting guide."],
+ ["What is the first step when mapping an unfamiliar vessel?", "Walk the vessel and note every unit and label", "Replace parts", "Update firmware", "Reboot the system", "Mapping before measuring."],
+ ["What should you mark at each end of a CAN backbone?", "A terminator", "A fuse", "A battery", "A bilge pump", "CAN buses are terminated at both ends."],
+ ["Which statement about a 'who fits what' table is true?", "It is a starting guess to confirm on the vessel", "It is exact for every hull", "It replaces the hull label", "It is a wiring diagram", "Brochures differ from the boat."],
+ ["What is the best source for identifying the system fitted?", "The labels on the actual units", "The brochure", "A forum", "The boat's colour", "Labels tell you what is on the boat."],
+ ["Which products share House DC?", "Batteries, BMS, MPPT, digital switching and most units", "Only batteries", "Only radar", "Only the engine", "House DC feeds almost everything."],
+ ["Why can a BMS opening look like a network fault?", "Digital units on the bank lose power", "It always gives an alarm", "It disables NMEA 2000 only", "It cannot", "Everything on the bank goes dark."],
+ ["In the S-Link scenario with alarm 12, what was missing?", "The END terminator", "A fuse", "A motor", "A battery", "A poorly terminated CAN bus raises counters."],
+ ["In the EC300 flybridge scenario, what blocked transfer?", "A lever-match transfer rule with unmatched levers", "A failed control head", "A communication fault", "A wrong battery", "Match the levers and press Station Select."],
+ ["In the CZone 'ON but dead' scenario, what was found?", "A blown ATC fuse at the channel", "A failed lamp", "A DIP conflict", "A network failure", "Voltage on the supply side only."],
+ ["What should be given to the owner at handover?", "A network map, product list, versions and settings", "Nothing", "Only a bill", "Only keys", "A good handover helps later fault-finding."],
+ ["Where should configuration files be kept?", "A copy off the boat as well as on it", "Nowhere", "Only on a plotter", "Only in a bilge", "A copy off the boat saves hours."]
+]);

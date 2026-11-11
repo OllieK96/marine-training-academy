@@ -76,6 +76,10 @@ code{background:var(--soft);padding:1px 6px;border-radius:5px;font-family:ui-mon
 .callout.safety{border-color:var(--red);background:color-mix(in srgb,var(--red) 10%,var(--card))}.callout.safety b.l{color:var(--red)}
 .callout.note{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 11%,var(--card))}.callout.note b.l{color:#b45309}
 [data-theme=dark] .callout.note b.l{color:var(--amber)}
+.callout.where{border-color:#2563eb;background:color-mix(in srgb,#2563eb 9%,var(--card))}.callout.where b.l{color:#1d4ed8}
+[data-theme=dark] .callout.where b.l{color:#93c5fd}
+.callout.verify{border-color:#9333ea;background:color-mix(in srgb,#9333ea 9%,var(--card))}.callout.verify b.l{color:#7e22ce}
+[data-theme=dark] .callout.verify b.l{color:#d8b4fe}
 table.t{border-collapse:collapse;width:100%;margin:12px 0 18px;font-size:14.5px;background:var(--card);border-radius:10px;overflow:hidden}
 table.t th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 table.t tr:nth-child(even) td{background:color-mix(in srgb,var(--soft) 50%,transparent)}

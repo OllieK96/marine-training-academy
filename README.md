@@ -3,7 +3,7 @@
 An offline, CDX-style interactive training app for marine auto electricians (Riviera, Maritimo and general vessels).
 It is a **static web app**: open `index.html` in any modern browser (Safari, Chrome, Edge, Firefox on Mac or iPad). No server, no internet, no build step.
 
-* 19 modules (12 core modules plus a 7-module Victron path alongside the original Victron module) · 128 lessons (Foundation / Intermediate / Advanced) · 539 exam questions (170 Victron, 111 Enerdrive/Mastervolt)
+* 29 modules (19 original plus 10 product-based modules: CZone, Garmin, Volvo Penta IPS/EVC, shaft-drive joysticks (Twin Disc), Seakeeper, lithium banks, remote monitoring, connectivity/solar/lighting, outboard systems, network map) · 198 lessons (Foundation / Intermediate / Advanced) · 856 exam questions. Product modules also extend Trim & Stabilisation (Humphree fins), Engines & Thrusters (thruster types, S-Link, lithium supply) and Shore Power (Glendinning Cablemaster).
 * Lessons are built from ~90 official manuals (see `sources/INDEX.md`): spec tables, wiring and fuse requirements, setup procedures, LED/error-code tables and troubleshooting. Every lesson ends with a **Source** box linking the manuals it used
 * 25 interactive types / 55+ placed interactives: calculators, animated system diagrams, hotspot diagrams with "Quiz me" mode, matching activities, fault-finding simulators, trim-tab and NMEA 2000 testers, **LED / error-code lookups with quizzes (13 families: Victron MPPT, Orion, VE.Direct, Lynx, charger LEDs, Mastervolt Mass Combi Ultra and ChargeMaster Plus, Enerdrive DC2DC+ / inverter-charger / ePRO Combi, Raymarine Evolution, CZone COI)**, **DIP-switch simulators (Quattro, ePRO Combi, Mass Combi Ultra, ChargeMaster Plus)**, a Victron error-code trainer and a NMEA 2000 power-drop checker
 * Module exams (15 randomised questions, 80% pass), final certification exam (50 questions across every module), printable certificates
@@ -150,3 +150,13 @@ TRAINING.addLessons('hotel', [ { id:'h5', title:'...', level:'Intermediate', min
 ## Source manuals
 
 `sources/INDEX.md` lists every manual used with its URL and local file. Not obtained: Volvo Penta IPS/EVC, Maretron, SeaStar/Teleflex, ZF/Twin Disc, Kohler, Lewmar and Muir manuals, and the Skylla-IP65 manual. The Enerdrive ePOWER 1000-2000 PDF is a scan with no extractable text.
+
+## Product-based modules (added Nov 2026)
+
+These are organised by **product and system, not by boat builder**. Each module runs basic to advanced and ends with an exam. A short **Where you'll see it** note in a lesson says which builders fit the product (from public builder pages and press material, marked for verification). Builders covered by the research (`research/other-builders.md`): Riviera, Maritimo, Princess, Sunseeker, Azimut, Ferretti (not identified), Boston Whaler, Contender, Pursuit, Everglades, Grady-White, Sea Ray.
+
+New block types in a lesson body: `['where', 'text']` (a "Where you'll see it" callout) and `['verify', 'text']` (flags dealer-only, revision-dependent, conflicting or secondary-source information; never skipped).
+
+New interactives (`js/interactives5.js`): `czdip` (CZone DIP address and channel-LED simulator), `skcalc` (Seakeeper model finder using `TRAINING.skmodels`), `netmap` (network map explorer with bus filters, fault injection and a "which bus is it?" quiz; data in `data/netmap-data.js`). New data-driven interactives: `hot:garminhelm`, `hot:ips`, `hot:hmex`; `match:czone|stabsys|siren|lithspec|outbcomp|conn`; ten fault-finding scenarios in `data/activities-new.js` (`czondead`, `garminnet`, `ipsjoy`, `ec300fly`, `skride`, `bmsdrop`, `sirnoswitch`, `hmexjoy`, `slinkbus`, `skpower`); code lookups `codes:slink`, `codes:ec300`, `codes:skgyro`, `codes:skride`. Questions for the product modules use `TRAINING.addQ(moduleId, [[question, correct, wrong1, wrong2, wrong3, explanation], ...])` (`data/qhelper.js`).
+
+Accuracy rules used: nothing is invented; where manuals disagree the lesson says so; items that could not be sourced (Mercury SmartCraft and Joystick Piloting manuals, the Volvo EVC-C IPS install manual, separate CZone module manuals, the Fusion Pulse owner manual, Simrad/Naviop and Böning/Empirbus configuration documents) are taught as principles and flagged. The US-spec-only and secondary-source items are marked.
